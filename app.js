@@ -9,5 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const battleship = document.querySelector(".battleship-container");
   const carrier = document.querySelector(".carrier-container");
   const StartButton = document.querySelector("#start");
-  const rotateButton = document.querySelector("#rot ");
+  const rotateButton = document.querySelector("#rotate");
+  const turnDisplay = document.querySelector("#whose-go");
+  const infoDisplay = document.querySelector("#info");
+  const userSquares = [];
+
+  const width = 10;
+
+  // Create boards
+  function creatBoard(grid, squares, width) {
+    for (let i = 0; i < width * width; i++) {
+      const square = document.createElement("div");
+      square.dataset.id = i;
+      grid.appendChild(square);
+      squares.push(square);
+    }
+  }
+
+  creatBoard(userGrid, userSquares, width);
 });
