@@ -130,4 +130,66 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   rotateButton.addEventListener("click", rotate);
+
+  // move around user ship
+  ship.forEach((ship) => ship.addEventListener("dragstart", dragStart));
+  userSquares.forEach((square) =>
+    square.addEventListener("dragstart", dragStart)
+  );
+  userSquares.forEach((square) =>
+    square.addEventListener("dragover", dragOver)
+  );
+  userSquares.forEach((square) =>
+    square.addEventListener("dragenter", dragEnter)
+  );
+  userSquares.forEach((square) =>
+    square.addEventListener("dragleave", dragLeave)
+  );
+  userSquares.forEach((square) => square.addEventListener("drop", dragDrop));
+  userSquares.forEach((square) => square.addEventListener("dragend", dragEnd));
+
+  let selectedShipNameWithIndex;
+  let draggedShip;
+  let draggedShipLength;
+
+  ship.forEach((ship) =>
+    ship.addEventListener("mousedown", (e) => {
+      selectedShipNameWithIndex = e.target.id;
+    })
+  );
+
+  function dragStart() {
+    draggedShip = this;
+    draggedShipLength = this.childNodes.length;
+  }
+  function dragOver(e) {
+    e.preventDefault();
+  }
+  function dragEnter(e) {
+    e.preventDefault();
+  }
+  function dragLeave() {
+    console.log("drag leave");
+  }
+  function dragDrop() {
+    let shipNameWithLastid = draggedShip.lastChild.id;
+    let shipClass = shipNameWithLastid.slice(0, -2);
+    console.log(shipClass);
+    let lastShipIndex = parseInt(shipNameWithLastid.substr(-1));
+    let shipLastId = lastShipIndex + parseInt(this.dataset.id);
+    console.log(shipLastId)
+
+    selectedShipIndex = parseInt(selectedShipNameWithIndex.substr(-1));
+
+    shipLastId = shipLastId - selectedShipIndex
+    console.log(shipLastId)
+
+    if (isHorizontal) {
+      for (let i = 0; i < draggedShipLength; i++) {
+        userSquares[parseInt(this.dataset.id) - selectedShipIndex].classList.add('taken', shipClass);
+      }
+    }
+    
+  }
+  function dragEnd() {}
 });
