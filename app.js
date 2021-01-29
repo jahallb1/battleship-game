@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const userSquares = [];
   const computerSquares = [];
   let isHorizontal = true;
+  let isGameOver = true;
+  let currentPlayer = 'user';
 
   const width = 10;
 
@@ -204,4 +206,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function dragEnd() {
     console.log('dragend')
   }
+
+  // Game Logic
+
+  function playGame() {
+    if(isGameOver) return;
+    if (currentPlayer === 'user') {
+      turnDisplay.innerHTML = 'Your Go';
+      computerSquares.forEach(square => square.addEventListener('click', function(e) {
+        revealSquare(square);
+      }))
+    }
+    if (currentPlayer === 'computer') {
+      turnDisplay.innerHTML = 'Computers Go';
+      // function computerGo
+    }
+  }
+
 });
