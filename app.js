@@ -220,6 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentPlayer === 'computer') {
       turnDisplay.innerHTML = 'Computers Go';
       // function computerGo
+      setTimeout(computerGo, 1000);
     }
   }
   StartButton.addEventListener('click', playGame)
@@ -237,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if(square.classList.contains('submarine')) submarineCount++;
       if(square.classList.contains('cruiser')) cruiserCount++;
       if(square.classList.contains('battleship')) battleshipCount++;
-      if(square.classList.contains('carrier')) crarrierCount++;
+      if(square.classList.contains('carrier')) carrierCount++;
     }
     if(square.classList.contains('taken')) {
       square.classList.add('boom');
@@ -246,6 +247,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     currentPlayer = 'computer';
     playGame();
+  }
+
+  let cpuDestroyerCount = 0;
+  let cpuSubmarineCount = 0;
+  let cpuCruiserCount = 0;
+  let cpuBattleshipCount = 0;
+  let cpuCarrierCount = 0;
+
+  function computerGo() {
+    let random = Math.floor(Math.random() * userSquares.length);
+    if (!userSquares[random].classList.contains('boom')){
+      if(userSquares[random].classList.contains('destoyer')) cpuDestroyerCount++;
+      if(userSquares[random].classList.contains('submarine')) cpuSubmarineCount++;
+      if(userSquares[random].classList.contains('cruiser')) cpuCruiserCount++;
+      if(userSquares[random].classList.contains('battleship')) cpuBattleshipCount++;
+      if(userSquares[random].classList.contains('carrier')) cpuCarrierCount++;
+    }
   }
 
 });
